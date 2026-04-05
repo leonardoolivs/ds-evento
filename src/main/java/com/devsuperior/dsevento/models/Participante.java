@@ -16,7 +16,11 @@ public class Participante {
     @Column(unique = true)
     private String email;
 
-    private List<Participante> participantes = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(name = "TB_PARTICIPANTE_ATIVIDADE", joinColumns = {
+            @JoinColumn(name = "participante_id")}, inverseJoinColumns = {
+            @JoinColumn(name = "atividade_id")})
+    private List<Atividade> atividades = new ArrayList<>();
 
     public Participante(Long id, String nome, String email) {
         this.id = id;
